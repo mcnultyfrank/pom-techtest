@@ -1,0 +1,60 @@
+@import "../../Assets/variables.scss";
+
+        .missionContainer {
+            display: flex;
+            flex-direction: row;
+            height: 50vh;
+            width: 100vw;
+            background-color: white;
+            .imageContainer {
+                height: 50vh;
+
+                width: 50vw;
+                img{
+                    width: 100%;
+                    object-fit: fill;
+
+                }
+            }
+            .textContainer {
+                padding: 2vw;
+                width: 50vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                font-family: Bwgradual,sans-serif;
+                img{
+                    padding-top: 10vh;
+                    padding-bottom: 5vh;
+        
+                }
+                h1{
+                    color: $pink;
+                    font-size: 44px;
+                    padding: 1vh;
+                    padding-bottom: 5vh;
+        
+                }
+                p {
+                    font-size: 18px;
+                    color: $black;
+                    padding-bottom: 5vh;
+                }
+                button {
+                    background-color: white;
+                    border-radius: 50px;
+                    border: 2px solid $pink;
+                    font-size: 20px;
+                    color: $pink;
+                    padding: 0.5vw;
+                    transition: 0.3s;
+                    cursor: pointer;
+                    &:hover {
+                        color: white;
+                        background-color: $pink;
+                    }
+                }
+            }
+        }
+    

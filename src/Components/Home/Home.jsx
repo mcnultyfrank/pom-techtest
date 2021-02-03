@@ -5,11 +5,11 @@ import firebase, {provider}  from "../../firebase.js"
 const Home = () => {
   const [user, setUser] = useState(null);
   const [userEmail, setUserEmail] = useState('');
+  var actionCodeSettings = {
+    url: 'http://localhost:3000/',
+    handleCodeInApp: true,
+  };
   const ref = useRef(actionCodeSettings);
-    var actionCodeSettings = {
-      url: 'http://localhost:3000/',
-      handleCodeInApp: true,
-    };
     // [END auth_email_link_actioncode_settings]
   const signUp = (userEmail, actionCodeSettings) => {
     firebase.auth().sendSignInLinkToEmail(userEmail, actionCodeSettings)
@@ -18,10 +18,11 @@ const Home = () => {
       window.localStorage.setItem('emailForSignIn', userEmail);
     })
     .catch((error) => {
-      console.log('nope');
-      
+      console.log('nope'); 
       var errorCode = error.code;
+      
       var errorMessage = error.message;
+      console.log(error.message)
     });
 
   }
@@ -36,7 +37,7 @@ const Home = () => {
         <h1>THE DATING APP FOR <span className= {styles.headerSpan}>MUSIC LOVERS</span></h1>
         <p>POM harnesses the Power of Music, channelling it into an exciting, new inclusive dating app.</p>
         <input onChange={ e => (setUserEmail(e.target.value))} type="email" name="" id="" placeholder="enter your email here..." className= {styles.inputEmail}/>
-        <input onClick={() => signUp('f-mcnulty@hotmail.com', ref)} type="submit" value="Join The Queue" className= {styles.inputSubmit}/></div>
+        <input onClick={() => signUp(userEmail, actionCodeSettings)} type="submit" value="Join The Queue" className= {styles.inputSubmit}/></div>
     </div>
   );
 };
