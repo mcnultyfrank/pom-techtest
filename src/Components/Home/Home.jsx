@@ -4,9 +4,10 @@ import firebase, {provider}  from "../../firebase.js"
 
 const Home = () => {
   const [user, setUser] = useState(null);
+  const [sent, setSent] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   var actionCodeSettings = {
-    url: 'http://localhost:3000/',
+    url: 'http://pomclone-techtest.web.app/',
     handleCodeInApp: true,
   };
   const ref = useRef(actionCodeSettings);
@@ -14,18 +15,23 @@ const Home = () => {
   const signUp = (userEmail, actionCodeSettings) => {
     firebase.auth().sendSignInLinkToEmail(userEmail, actionCodeSettings)
     .then(() => {
-      console.log(userEmail)
       window.localStorage.setItem('emailForSignIn', userEmail);
+      setSent(true)
     })
     .catch((error) => {
       console.log('nope'); 
       var errorCode = error.code;
-      
       var errorMessage = error.message;
       console.log(error.message)
     });
-
   }
+
+  useEffect(() => {
+    return () => setSent();
+  }, [setSent])
+  
+  console.log(sent);
+  
 
   
   
@@ -37,7 +43,7 @@ const Home = () => {
         <h1>THE DATING APP FOR <span className= {styles.headerSpan}>MUSIC LOVERS</span></h1>
         <p>POM harnesses the Power of Music, channelling it into an exciting, new inclusive dating app.</p>
         <input onChange={ e => (setUserEmail(e.target.value))} type="email" name="" id="" placeholder="enter your email here..." className= {styles.inputEmail}/>
-        <input onClick={() => signUp(userEmail, actionCodeSettings)} type="submit" value="Join The Queue" className= {styles.inputSubmit}/></div>
+        <input onClick={() => signUp(userEmail, actionCodeSettings)} type="submit"  value={sent === false ? "Join The Queue" : "Email sent!" } className= {styles.inputSubmit}/></div>
     </div>
   );
 };

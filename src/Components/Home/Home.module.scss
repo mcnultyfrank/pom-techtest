@@ -60,7 +60,7 @@
             margin-bottom: 5vh;
 
             &:focus{
-                border-color: rgba($color: lightblue, $alpha: 0.9);
+                border-color: rgba($color: $pink, $alpha: 0.9);
             }
             &::placeholder{
                 color: white;
@@ -76,6 +76,11 @@
             height: 35px;
             font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+            &:hover {
+                color: white;
+            }
         }
     }
 

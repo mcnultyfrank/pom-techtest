@@ -62,21 +62,21 @@
                 color: $pink;
                 border: 3px solid $pink;
                 width: 150px;
-                transition: 0.3s;
+                transition: 0.3s; 
                 cursor: pointer;
                 font-weight: 900;
 
 
                 &:hover {
-                    color: white;
-                    background-color: $pink;
+                    color: $pink;
+                    background-color: white;
                 }
             }
         }
         .navFooter{
             width: 80%;
             height: 30%;
-            display: flex;
+            display: flex; 
             flex-direction: row;
             justify-content: space-between;
             text-align: center;
