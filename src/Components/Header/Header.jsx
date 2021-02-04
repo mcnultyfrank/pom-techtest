@@ -7,7 +7,7 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 const Header = () => {
   const [open, setOpen] = useState(false);
   const noDisplayContents = {
-    transform: 'translateY(-150%)',
+    transform: 'translateY(-160%)',
     display: '0'
   }
   const displayContents = {
@@ -21,7 +21,7 @@ const Header = () => {
         <div>
           <img src="https://uploads-ssl.webflow.com/5f760442c871757baf72e5ee/5f847e77ef0f35843704c5b8_pom%20logo.svg" loading="lazy" alt="" />
         </div>
-        <div  className = {styles.menuIconContainer}>
+        <div  className =  {styles.menuIconContainer}>
           <FontAwesomeIcon size='2x' onClick={() => setOpen(!open)} icon={open === true ?  faTimes : faBars}  className={styles.menuIcon} /> 
         </div>
       </header>
@@ -31,7 +31,7 @@ const Header = () => {
             <h2>HOW IT WORKS</h2>
             <h2>DATING TIPS</h2>
             <h2>CONTACT</h2>
-            <button>Join The Queue</button>
+            <button onClick = {() => setOpen(false)}>Join The Queue</button>
           </ul>
           <div className = {styles.navFooter}>
             <div className={styles.soonContainer}>

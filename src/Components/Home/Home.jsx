@@ -5,26 +5,45 @@ import firebase, {provider}  from "../../firebase.js"
 const Home = () => {
   const [sent, setSent] = useState(false);
   const [userEmail, setUserEmail] = useState('');
-  var actionCodeSettings = {
-    url: 'http://pomclone-techtest.web.app/',
-    handleCodeInApp: true,
-  };
+ 
+  // const display = {
+  //   display: 'contents'
+  // }
+  // const noDisplay = {
+  //   display: 'none'
+  // }
   const signUp = (userEmail, actionCodeSettings) => {
     firebase.auth().sendSignInLinkToEmail(userEmail, actionCodeSettings)
     .then(() => {
       window.localStorage.setItem('emailForSignIn', userEmail);
-      sendCustomVerificationEmail(userEmail, displayName, 'hello there')
       setSent(true)
+      console.log(userEmail);
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
     });
+    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+      var email = window.localStorage.getItem('emailForSignIn');      
+      if (!email) {
+        email = window.prompt('Please provide your email for confirmation');
+      }
+      firebase.auth().signInWithEmailLink(email, window.location.href)
+        .then((result) => {
+          window.localStorage.removeItem('emailForSignIn');
+        })
+        .catch((error) => {
+        });
+    }
   }
 
   useEffect(() => {
     return () => setSent();
   }, [setSent])
+  useEffect(() => {
+    return   window.scrollTo(0, 0);
+  },[])
+
 
   return (
     <div className = {styles.homeContainer}>
@@ -33,7 +52,7 @@ const Home = () => {
         <h1>THE DATING APP FOR <span className= {styles.headerSpan}>MUSIC LOVERS</span></h1>
         <p>POM harnesses the Power of Music, channelling it into an exciting, new inclusive dating app.</p>
         <input onChange={ e => (setUserEmail(e.target.value))} type="email" name="" id="" placeholder="enter your email here..." className= {styles.inputEmail}/>
-        <input onClick={() => signUp(userEmail, actionCodeSettings)} type="submit"  value={sent === false ? "Join The Queue" : "Check inbox!" } className= {styles.inputSubmit}/></div>
+        <input onClick={() => signUp(userEmail, {url: 'https://pomclone-techtest.web.app/queue',handleCodeInApp: true,})} type="submit"  value={sent === false ? "Join The Queue" : "Check your inbox and follow instructions to continue!" } className= {styles.inputSubmit}/></div>
     </div>
   );
 };
