@@ -5,13 +5,7 @@ import firebase, {provider}  from "../../firebase.js"
 const Home = () => {
   const [sent, setSent] = useState(false);
   const [userEmail, setUserEmail] = useState('');
- 
-  // const display = {
-  //   display: 'contents'
-  // }
-  // const noDisplay = {
-  //   display: 'none'
-  // }
+
   const signUp = (userEmail, actionCodeSettings) => {
     firebase.auth().sendSignInLinkToEmail(userEmail, actionCodeSettings)
     .then(() => {
